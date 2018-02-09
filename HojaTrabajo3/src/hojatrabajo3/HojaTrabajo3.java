@@ -30,7 +30,7 @@ public class HojaTrabajo3 {
             bw = new BufferedWriter(new FileWriter(archivo));
             for (int i=0;i<3000;i++){
                 int numero = (int)(Math.random() * 10000) + 1;
-                System.out.println(numero);
+             //   System.out.println(numero);
                 bw.write(numero+"\n");
             }
              bw.close();
