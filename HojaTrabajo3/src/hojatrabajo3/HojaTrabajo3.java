@@ -22,7 +22,6 @@ public class HojaTrabajo3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         String ruta = System.getProperty("user.dir")+System.getProperty("file.separator")+"archivo.txt";
         File archivo = new File(ruta);
         BufferedWriter bw;

@@ -7,7 +7,7 @@ package hojatrabajo3;
 
 /**
  *
- * @author alber
+ * @author alber    
  */
 public class Sorts {
     
@@ -43,21 +43,14 @@ public class Sorts {
  * @param x Array donde se almacenan los datos
  */
 public static void Bubblesort(Comparable[] x){
-	boolean estado = true;
-	int j = 0;
-	Comparable temporal = null;
-	while(estado){
-		estado = false;
-		j++;
-		for(int i = 0; i < x.length - j; i++){
-			if(x[i].compareTo(x[i+1])>0)//if(x[i] > x[i+1]){
-				temporal = x[i];
-				x[i] = x[i+1];
-				x[i+1] = temporal;
-				estado = true;
-			}
-		}
-	}
+    for (int i= x.length; i>1; i--){
+        for (int j = 1; j<i; j++){
+            if (x[j-1].compareTo(x[j]) > 0){
+                swap(x,j-1,j);
+            }
+        }
+    }
+    }
 
 
         public static void gnomeSort(Comparable[] data) {
