@@ -34,12 +34,14 @@ public class HojaTrabajo3 {
         File archivo = new File(ruta);
         BufferedWriter bw;
         BufferedReader fr;
+        Comparable[] valores = new Comparable[3000];
         try{
             bw = new BufferedWriter(new FileWriter(archivo));
             for (int i=0;i<numeros;i++){
                 int numero = (int)(Math.random() * 10000) + 1;
              //   System.out.println(numero);
                 bw.write(numero+"\n");
+                valores[i]= numero;
             }
              bw.close();
         }catch(Exception e){
