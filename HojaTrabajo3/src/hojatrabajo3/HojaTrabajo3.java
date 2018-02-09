@@ -13,6 +13,7 @@ import java.io.IOException;
 
 /**
  *
+ * @author Paul Belches
  * @author Andres Urizar
  */
 public class HojaTrabajo3 {
