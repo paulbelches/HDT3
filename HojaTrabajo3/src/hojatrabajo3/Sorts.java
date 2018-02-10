@@ -4,40 +4,15 @@
  * and open the template in the editor.
  */
 package hojatrabajo3;
-
+import java.util.*;
 /**
  *
- * @author alber    
+ * @author Paul Belches
+ * @author Andres Urizar
  */
 public class Sorts {
     
-    /**
-     * Método de Radixsort, ordena los números verificando por unidad, decena y demás dependiendo del tamaño del valor
-     * @param x  Array donde se almacenaran los datos
-     */
-   public static void Radixsort(Comparable[] x)
-{
-	Comparable inicio = x[0];
-	int exp = 1;
-	int largo = x.length;
-	Comparable [] digitos = new Comparable[10];
-	for(int i=1;i<largo;i++){
-		if(x[i].compareTo(inicio)>0)//if(x[i]>inicio){
-			inicio = x[i];
-		}
-	while((int)inicio/exp >0){
-		int[] temporal = new int[10];
-		for(int i=0;i<largo;i++)
-			temporal[((int)x[i]/exp)%10]++;
-		for(int i=1;i<10;i++)
-			temporal[i] += temporal[i-1];
-		for(int i=largo-1;i>=0;i--)
-			digitos[--temporal[((int)x[i]/exp)%10]] = x[i];
-		for(int i=0; i<largo; i++)
-			x[i] = digitos[i];
-		exp *=10;
-	}
-}
+    
 /**
  * Método de Bubblesort, ordena los valores intercambiando de posición los valores dependiendo quien es mayor
  * @param x Array donde se almacenan los datos
@@ -52,7 +27,10 @@ public static void Bubblesort(Comparable[] x){
     }
     }
 
-
+/**
+ * Método de gnomeSort, ordena los valores comparando valor si son mayores
+ * @param data array tipo Comparable
+ */
         public static void gnomeSort(Comparable[] data) {
         int x = 1;
         int y = 2;
@@ -73,7 +51,12 @@ public static void Bubblesort(Comparable[] x){
      
      
      
-     
+/**
+ * Método de swap, es para poder cambiar valores de posición por medio de una temporal
+ * @param data
+ * @param i
+ * @param j 
+ */     
     public static void swap(Comparable data[], int i, int j)
         // pre: 0 <= i,j < data.length
         // post: data[i] and data[j] are exchanged
@@ -84,7 +67,13 @@ public static void Bubblesort(Comparable[] x){
         data[j] = temp;
         }
     
-    
+ /**
+  * Método para utilizar en sorts, para dividirlo al momento de ordenarlo
+  * @param data
+  * @param left
+  * @param right
+  * @return posición
+  */   
     
     private static int partition(Comparable data[], int left, int right)
        // pre: left <= right
@@ -102,11 +91,21 @@ public static void Bubblesort(Comparable[] x){
        else return right;
        }
        }
+    /**
+     * Método de quicksort, el cual ordena los dividiendo el array en varias mitades.
+     * @param data 
+     */
     public static void quickSort(Comparable data[])
         // post: the values in data[0..n-1] are in ascending order
         {
         quickSortRecursive(data,0,data.length-1);
         }
+    /**
+     * Método para utilizar recursión dentro del quicksort
+     * @param data
+     * @param left
+     * @param right 
+     */
     private static void quickSortRecursive(Comparable data[],int left,int right)
     // pre: left <= right
     // post: data[left..right] in ascending order
@@ -121,7 +120,14 @@ public static void Bubblesort(Comparable[] x){
     
     
     
-    
+    /**
+     * Método para poder intercalar dos arrays
+     * @param data
+     * @param temp
+     * @param low
+     * @param middle
+     * @param high 
+     */
     private static void merge(Comparable data[], Comparable temp[],int low, int middle, int high)
         // pre: data[middle..high] are ascending
         // temp[low..middle-1] are ascending
@@ -146,6 +152,13 @@ public static void Bubblesort(Comparable[] x){
         }
         // ...or some values left (in correct place) in data array
         }
+    /**
+     * Método para utilizar recursión dentro del metodo del mergesort
+     * @param data
+     * @param temp
+     * @param low
+     * @param high 
+     */
     private static void mergeSortRecursive(Comparable data[],Comparable temp[], int low, int high)
         // pre: 0 <= low <= high < data.length
         // post: values in data[low..high] are in ascending order
@@ -166,12 +179,78 @@ public static void Bubblesort(Comparable[] x){
         // merge halves together
         merge(data,temp,low,middle,high);
         }
+    /**
+     * Método mergesort, que divide el array para poder intercalarlos
+     * @param data 
+     */
     public static void mergeSort(Comparable data[])
         // pre: 0 <= n <= data.length
         // post: values in data[0..n-1] are in ascending order
         {
         mergeSortRecursive(data,new Comparable[data.length],0,data.length-1);
         }
+    /**
+     * Método Radixsort, para ordenar por medio de digitos, en donde va clasificando dependiendo el digito.
+     * @param arr 
+     */
+    public static void Radixsort(Comparable arr[]){
+        // Find the maximum number to know number of digits
+        int n = arr.length;
+        Comparable m = getMax(arr, n);
+ 
+        // Do counting sort for every digit. Note that instead
+        // of passing digit number, exp is passed. exp is 10^i
+        // where i is current digit number
+        for (int exp = 1; (int)m/exp > 0; exp *= 10)
+            countSort(arr, n, exp);
+    }
+    /**
+     * Método de conteo para utilizar en el Radixsort
+     * @param arr
+     * @param n
+     * @param exp 
+     */
+    private static void countSort(Comparable arr[], int n, int exp){
+        int output[] = new int[n]; // output array
+        int i;
+        int count[] = new int[10];
+        Arrays.fill(count,0);
+       
+        // Store count of occurrences in count[]
+        for (i = 0; i < n; i++)
+            count[ ((int)arr[i]/exp)%10 ]++;
+ 
+        // Change count[i] so that count[i] now contains
+        // actual position of this digit in output[]
+        for (i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+ 
+        // Build the output array
+        for (i = n - 1; i >= 0; i--)
+        {
+            output[count[ ((int)arr[i]/exp)%10 ] - 1] = (int)arr[i];
+            
+            count[ ((int)arr[i]/exp)%10 ]--;
+        }
+ 
+        // Copy the output array to arr[], so that arr[] now
+        // contains sorted numbers according to curent digit
+        for (i = 0; i < n; i++)
+            arr[i] = output[i];
+    }
+    /**
+     * Método para poder obtener el mayor valor del array, para el Radixsort 
+     * @param arr
+     * @param n
+     * @return 
+     */
+    private static Comparable getMax(Comparable arr[], int n){
+        Comparable mx = arr[0];
+        for (int i = 1; i < n; i++)
+            if (arr[i].compareTo(mx) > 0)
+                mx = arr[i];
+        return mx;
+    }
 
 }
    

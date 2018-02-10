@@ -5,12 +5,13 @@
  */
 package hojatrabajo3;
 
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 /**
- *
- * @author alber
+ * @author Paul Belches
+ * @author Andres Urizar
  */
 public class LectorMain {
     
@@ -32,6 +33,7 @@ try{
    }
 catch(Exception e){
     System.out.print("Hubo un error");
-}       
+}
+   
     }
 }

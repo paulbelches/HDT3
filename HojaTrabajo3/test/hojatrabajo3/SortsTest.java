@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ * @author Paul Belches
+ * @author Andres Urizar
+ */
 package hojatrabajo3;
 
 import java.util.Arrays;
@@ -25,8 +30,8 @@ public class SortsTest {
     @Test
     public void testRadixsort() {
         System.out.println("Radixsort");
-        Comparable[] x = new Integer[] {2,5,6,3,4};
-        Comparable[] resul = new Integer[] {2,3,4,5,6};
+        Comparable[] x = new Integer[] {2,5,6,3,4,7,9,8,11,10,15,12,14,13,16,20,19,17,18,1,30};
+        Comparable[] resul = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,30};
         Sorts.Radixsort(x);
         assertArrayEquals( resul, x );
     }
